@@ -1,0 +1,32 @@
+name: start-app
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 */3 * *'
+jobs:
+  provision-infra:
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
+      AWS_REGION: ${{ secrets.CLOUD_REGION }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone terraform scripts
+      run: git clone https://github.com/kartheek542/tf-app.git terraform_src
+      
+    - name: List the contents of the terraform directory
+      run: ls -la
+      working-directory: terraform_src
+    
+    - name: Install Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.10.2"
+
+    - name: Initialize Terraform
+      run: terraform init
+      working-directory: terraform_src
+
+    - name: Destroy Terraform
+      run: terraform destroy --auto-approve
+      working-directory: terraform_src
