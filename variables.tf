@@ -3,5 +3,5 @@ variable "vpc_cidr" {
 }
 
 variable "subnets_count" {
-  default = 1
+  default = 2
 }
