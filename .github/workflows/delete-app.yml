@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '0 0 */3 * *'
 jobs:
-  provision-infra:
+  destroy-infra:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
