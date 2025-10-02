@@ -27,6 +27,25 @@ jobs:
       run: terraform init
       working-directory: terraform_src
 
-    - name: Destroy Terraform
-      run: terraform destroy --auto-approve
+    - name: Create workspaces if not exists
+      run: |
+        terraform workspace list | grep -q "dev" || terraform workspace new dev
+        terraform workspace list | grep -q "qa" || terraform workspace new qa
+        terraform workspace list | grep -q "prod" || terraform workspace new prod
+      working-directory: terraform_src
+
+    - name: Validate Terraform
+      run: terraform validate
+      working-directory: terraform_src
+
+    - name: Apply Terraform - dev
+      run: terraform workspace select dev && terraform destroy --auto-approve -var-file="dev.tfvars"
+      working-directory: terraform_src
+
+    - name: Apply Terraform - qa
+      run: terraform workspace select qa && terraform destroy --auto-approve -var-file="qa.tfvars"
+      working-directory: terraform_src
+      
+    - name: Apply Terraform - prod
+      run: terraform workspace select prod && terraform destroy --auto-approve -var-file="prod.tfvars"
       working-directory: terraform_src
