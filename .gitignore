@@ -1,2 +1,3 @@
 .terraform*
 tf-elk-app-private-key
+*.png
