@@ -4,7 +4,10 @@ variable "vpc_cidr" {
 variable "public_subnet_cidr" {
   default = ""
 }
-variable "private_subnet_cidr" {
+variable "private_subnet_cidr_1" {
+  default = ""
+}
+variable "private_subnet_cidr_2" {
   default = ""
 }
 variable "public_key_path" {
