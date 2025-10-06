@@ -39,19 +39,29 @@ jobs:
       run: terraform workspace select dev && terraform apply --auto-approve -var-file="dev.tfvars"
       working-directory: terraform_src
 
-    - name: Apply Terraform - qa
-      run: terraform workspace select qa && terraform apply --auto-approve -var-file="qa.tfvars"
-      working-directory: terraform_src
+    # - name: Apply Terraform - qa
+    #   run: terraform workspace select qa && terraform apply --auto-approve -var-file="qa.tfvars"
+    #   working-directory: terraform_src
       
-    - name: Apply Terraform - prod
-      run: terraform workspace select prod && terraform apply --auto-approve -var-file="prod.tfvars"
-      working-directory: terraform_src
+    # - name: Apply Terraform - prod
+    #   run: terraform workspace select prod && terraform apply --auto-approve -var-file="prod.tfvars"
+    #   working-directory: terraform_src
+
+    # - name: Get Terraform Outputs
+    #   run: |
+    #     terraform workspace select dev && terraform output -json > dev-terraform-output.json
+    #     terraform workspace select qa && terraform output -json > qa-terraform-output.json
+    #     terraform workspace select prod && terraform output -json > prod-terraform-output.json
+    #   working-directory: terraform_src
 
     - name: Get Terraform Outputs
       run: |
         terraform workspace select dev && terraform output -json > dev-terraform-output.json
-        terraform workspace select qa && terraform output -json > qa-terraform-output.json
-        terraform workspace select prod && terraform output -json > prod-terraform-output.json
+      working-directory: terraform_src
+
+    - name: Show outputs
+      run: |
+        cat dev-terraform-output.json | jq
       working-directory: terraform_src
 
     - name: List the contents of the directory

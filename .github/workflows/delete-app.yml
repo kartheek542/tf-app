@@ -42,10 +42,10 @@ jobs:
       run: terraform workspace select dev && terraform destroy --auto-approve -var-file="dev.tfvars"
       working-directory: terraform_src
 
-    - name: Apply Terraform - qa
-      run: terraform workspace select qa && terraform destroy --auto-approve -var-file="qa.tfvars"
-      working-directory: terraform_src
+    # - name: Apply Terraform - qa
+    #   run: terraform workspace select qa && terraform destroy --auto-approve -var-file="qa.tfvars"
+    #   working-directory: terraform_src
       
-    - name: Apply Terraform - prod
-      run: terraform workspace select prod && terraform destroy --auto-approve -var-file="prod.tfvars"
-      working-directory: terraform_src
+    # - name: Apply Terraform - prod
+    #   run: terraform workspace select prod && terraform destroy --auto-approve -var-file="prod.tfvars"
+    #   working-directory: terraform_src
