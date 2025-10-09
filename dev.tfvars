@@ -10,10 +10,10 @@ database_port            = 5432
 database_instance_type   = "db.t3.micro"
 database_master_username = "tf_admin"
 eks_node_groups = [
-    {
-        name = "eks-node-group-1"
-        instance_type = "t3.medium"
-        disk_size = 20
-        group_size = 1
-    }
+  {
+    name          = "eks-node-group-1"
+    instance_type = "t3.medium"
+    disk_size     = 20
+    group_size    = 1
+  }
 ]
