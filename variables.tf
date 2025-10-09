@@ -31,3 +31,9 @@ variable "database_instance_type" {
 variable "database_master_username" {
   default = ""
 }
+variable "jump_server_instance_type" {}
+variable "eks_node_groups" {
+}
+variable "eks_allowed_ports" {
+  default = [443]
+}
