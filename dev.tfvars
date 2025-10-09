@@ -15,6 +15,6 @@ eks_node_groups = [
     name          = "eks-node-group-1"
     instance_type = "t3.medium"
     disk_size     = 20
-    group_size    = 1
+    group_size    = 0
   }
 ]
