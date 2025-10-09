@@ -43,7 +43,7 @@ module "jump-server" {
   instance_type   = var.jump_server_instance_type
   subnet_id       = module.network.public_subnet_id
   eks_cluster_arn = module.eks_cluster.cluster_arn
-  depends_on = [ module.eks_cluster ]
+  depends_on      = [module.eks_cluster]
 }
 
 resource "aws_vpc_security_group_ingress_rule" "jump_server_eks_cluster_sg_rules" {
