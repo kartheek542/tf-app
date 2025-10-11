@@ -21,24 +21,30 @@ module "jump-server-iam-role" {
   # eks_cluster_arns = []
 }
 
+module "my-key-pair" {
+  source = "git::https://github.com/kartheek542/tf-modules.git//aws-modules/elk-app/key-pair?ref=main"
+  name = "elk-key-pair"
+  public_key_path = var.public_key_path
+}
+
 module "public-app-server" {
   source = "git::https://github.com/kartheek542/tf-modules.git//aws-modules/elk-app/public-app-server?ref=main"
 
-  public_key_path       = var.public_key_path
   instance_type         = var.app_server_instance_type
   subnet_id             = module.network.public_subnet_id
   security_group_id     = module.public-ec2-sg.sg_id
   instance_profile_name = module.jump-server-iam-role.instance_profile_name[0]
+  key_name = module.my-key-pair.key_name
 }
 
 module "private-app-server" {
   source = "git::https://github.com/kartheek542/tf-modules.git//aws-modules/elk-app/private-app-server?ref=main"
 
-  public_key_path       = var.public_key_path
   instance_type         = var.app_server_instance_type
   subnet_id             = module.network.private_subnet_ids[0]
   security_group_id     = module.private-ec2-sg.sg_id
   instance_profile_name = module.general-iam-role.instance_profile_name[0]
+  key_name = module.my-key-pair.key_name
 }
 
 module "private-ec2-sg" {
