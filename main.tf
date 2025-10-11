@@ -34,6 +34,7 @@ module "eks_cluster" {
   cluster_version    = "1.31"
   pods_ip_cidr       = "192.168.0.0/16"
   node_groups        = var.eks_node_groups
+  depends_on         = [module.network]
 }
 
 module "jump-server" {
