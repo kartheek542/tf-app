@@ -9,14 +9,14 @@ module "network" {
 module "general-iam-role" {
   source = "git::https://github.com/kartheek542/tf-modules.git//aws-modules/elk-app/iam-role?ref=main"
 
-  name = "general-iam-role"
+  name             = "general-iam-role"
   instance_profile = true
 }
 
 module "jump-server-iam-role" {
   source = "git::https://github.com/kartheek542/tf-modules.git//aws-modules/elk-app/iam-role?ref=main"
 
-  name = "jump-server-iam-role"
+  name             = "jump-server-iam-role"
   instance_profile = true
   # eks_cluster_arns = []
 }
@@ -24,38 +24,38 @@ module "jump-server-iam-role" {
 module "public-app-server" {
   source = "git::https://github.com/kartheek542/tf-modules.git//aws-modules/elk-app/public-app-server?ref=main"
 
-  public_key_path = var.public_key_path
-  instance_type   = var.app_server_instance_type
-  subnet_id       = module.network.public_subnet_id
-  security_group_id = module.public-ec2-sg.sg_id
+  public_key_path       = var.public_key_path
+  instance_type         = var.app_server_instance_type
+  subnet_id             = module.network.public_subnet_id
+  security_group_id     = module.public-ec2-sg.sg_id
   instance_profile_name = module.jump-server-iam-role.instance_profile_name[0]
 }
 
 module "private-app-server" {
   source = "git::https://github.com/kartheek542/tf-modules.git//aws-modules/elk-app/private-app-server?ref=main"
 
-  public_key_path = var.public_key_path
-  instance_type   = var.app_server_instance_type
-  subnet_id       = module.network.private_subnet_ids[0]
-  security_group_id = module.private-ec2-sg.sg_id
+  public_key_path       = var.public_key_path
+  instance_type         = var.app_server_instance_type
+  subnet_id             = module.network.private_subnet_ids[0]
+  security_group_id     = module.private-ec2-sg.sg_id
   instance_profile_name = module.general-iam-role.instance_profile_name[0]
 }
 
 module "private-ec2-sg" {
   source = "git::https://github.com/kartheek542/tf-modules.git//aws-modules/elk-app/security-group?ref=main"
 
-  name         = "private-ec2-sg"
-  vpc_id       = module.network.vpc_id
+  name           = "private-ec2-sg"
+  vpc_id         = module.network.vpc_id
   allowed_ranges = [var.private_subnet_cidr_1, var.private_subnet_cidr_2, var.public_subnet_cidr]
 }
 
 module "public-ec2-sg" {
   source = "git::https://github.com/kartheek542/tf-modules.git//aws-modules/elk-app/security-group?ref=main"
 
-  name         = "public-ec2-sg"
-  vpc_id       = module.network.vpc_id
+  name           = "public-ec2-sg"
+  vpc_id         = module.network.vpc_id
   allowed_ranges = [var.private_subnet_cidr_1, var.private_subnet_cidr_2, var.public_subnet_cidr]
-  public = true
+  public         = true
 }
 
 # 
