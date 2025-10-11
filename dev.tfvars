@@ -18,3 +18,4 @@ eks_node_groups = [
     group_size    = 1
   }
 ]
+eks_allowed_ports = [443, 80, 22]
