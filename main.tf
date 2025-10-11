@@ -35,6 +35,7 @@ module "public-app-server" {
   security_group_id     = module.public-ec2-sg.sg_id
   instance_profile_name = module.jump-server-iam-role.instance_profile_name[0]
   key_name              = module.my-key-pair.key_name
+  depends_on            = [module.network]
 }
 
 module "private-app-server" {
@@ -45,6 +46,7 @@ module "private-app-server" {
   security_group_id     = module.private-ec2-sg.sg_id
   instance_profile_name = module.general-iam-role.instance_profile_name[0]
   key_name              = module.my-key-pair.key_name
+  depends_on            = [module.network]
 }
 
 module "private-ec2-sg" {
