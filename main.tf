@@ -36,7 +36,7 @@ module "public-app-server" {
   instance_profile_name = module.jump-server-iam-role.instance_profile_name[0]
   key_name              = module.my-key-pair.key_name
   depends_on            = [module.network]
-  user_data_script = var.user_data_script
+  user_data_script      = var.user_data_script
 }
 
 module "private-app-server" {
@@ -79,7 +79,7 @@ module "database" {
   master_username    = var.database_master_username
   private_subnet_ids = module.network.private_subnet_ids
   public_subnet_id   = module.network.public_subnet_id
-  security_group_id     = module.private-ec2-sg.sg_id
+  security_group_id  = module.private-ec2-sg.sg_id
 }
 
 # module "eks_cluster" {
