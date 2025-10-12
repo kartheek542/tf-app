@@ -37,3 +37,5 @@ variable "eks_node_groups" {
 variable "eks_allowed_ports" {
   default = [443]
 }
+
+variable "user_data_script" { }

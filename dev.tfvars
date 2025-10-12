@@ -19,3 +19,4 @@ eks_node_groups = [
   }
 ]
 eks_allowed_ports = [443, 80, 22]
+user_data_script = "user-data-docker.sh"
