@@ -6,4 +6,5 @@ module "eks_cluster" {
   pods_ip_cidr       = "192.168.0.0/16"
   node_groups        = var.eks_node_groups
   depends_on         = [module.network]
+  security_group_ids = [module.private-ec2-sg.sg_id]
 }

@@ -17,3 +17,10 @@ echo \
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 sudo usermod -aG docker ubuntu
+
+curl -LO "https://dl.k8s.io/release/v1.31.0/bin/linux/amd64/kubectl"
+chmod +x kubectl
+mv kubectl /usr/local/bin/kubectl
+
+kubectl edit configmap aws-auth -n kube-system
+aws eks update-kubeconfig --region ap-south-1 --name dev-elk-eks-cluster

@@ -6,6 +6,6 @@ module "public-app-server" {
   security_group_id     = module.public-ec2-sg.sg_id
   instance_profile_name = module.jump-server-iam-role.instance_profile_name[0]
   key_name              = module.my-key-pair.key_name
-  depends_on            = [module.network, module.jump-server-iam-role]
   user_data_script      = var.user_data_script
+  depends_on            = [module.network, module.jump-server-iam-role]
 }
