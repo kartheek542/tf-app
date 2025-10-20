@@ -7,5 +7,5 @@ module "public-app-server" {
   instance_profile_name = module.jump-server-iam-role.instance_profile_name[0]
   key_name              = module.my-key-pair.key_name
   user_data_script      = var.user_data_script
-  depends_on            = [module.network, module.jump-server-iam-role]
+  depends_on            = [module.network, module.jump-server-iam-role, module.eks_access]
 }
