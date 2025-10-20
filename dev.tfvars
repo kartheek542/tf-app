@@ -11,12 +11,12 @@ database_instance_type    = "db.t3.micro"
 database_master_username  = "tf_admin"
 jump_server_instance_type = "t2.micro"
 eks_node_groups = [
-  # {
-  #   name          = "eks-node-group-1"
-  #   instance_type = "t3.medium"
-  #   disk_size     = 20
-  #   group_size    = 1
-  # }
+  {
+    name          = "eks-node-group-1"
+    instance_type = "t3.medium"
+    disk_size     = 20
+    group_size    = 1
+  }
 ]
 eks_allowed_ports = [443, 80, 22]
 user_data_script  = "user-data-docker.sh"
