@@ -24,3 +24,5 @@ mv kubectl /usr/local/bin/kubectl
 
 kubectl edit configmap aws-auth -n kube-system
 aws eks update-kubeconfig --region ap-south-1 --name dev-elk-eks-cluster
+
+kubectl create namespace elk-kar

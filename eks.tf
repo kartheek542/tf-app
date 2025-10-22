@@ -7,4 +7,6 @@ module "eks_cluster" {
   node_groups        = var.eks_node_groups
   depends_on         = [module.network]
   security_group_ids = [module.private-ec2-sg.sg_id]
+  namespace          = "elk-kar"
+  service_account    = "kar-aws"
 }
